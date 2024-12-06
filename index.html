@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name = "author" content = "nandu">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Wedding Card Editor</title>
+</head>
+<body>
+    <div class="editor-container">
+        <header class="editor-header">
+            <div class="title-container">
+                <h1 class="editor-title" id="cardTitle">My Wedding Card</h1>
+                <button class="edit-title-btn"><i class="fas fa-pencil"></i></button>
+            </div>
+            <div class="header-actions">
+                <button class="undo-btn" disabled><i class="fas fa-undo"></i></button>
+                <button class="redo-btn" disabled><i class="fas fa-redo"></i></button>
+                <button class="save-button" id="saveButton"><i class="fas fa-save"></i> Save</button>
+                <button class="download-button" id="downloadButton">Download <i class="fas fa-download"></i></button>
+            </div>
+        </header>
+
+        <div class="editor-content">
+            <div class="page-navigation">
+                <div class="page-list">
+                    <h3><i class="fas fa-book-open"></i> All Pages</h3>
+                    <div class="page-thumbnails">
+                        <div class="page-thumbnail selected">
+                            <img src="My Invitation.jpeg" alt="Wedding Template">
+                            <span>Front Page</span>
+                        </div>
+                        <div class="page-thumbnail">
+                            <div class="add-page">
+                                <i class="fas fa-plus"></i>
+                                <span>Add Page</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="customize-pages-btn"><i class="fas fa-cog"></i> Customize Pages</button>
+                </div>
+            </div>
+
+            <div class="editor-main">
+                <button class="nav-prev"><i class="fas fa-chevron-left"></i></button>
+                <div id="weddingCard"></div>
+                <button class="nav-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="editor-controls">
+                <div class="form-section">
+                    <!--<div class="section-header">
+                        <i class="fas fa-user-edit"></i>
+                        <h3>Wedding Details</h3>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label><i class="fas fa-female"></i> Bride</label>
+                        <input type="text" id="brideName" placeholder="Enter bride's name">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label><i class="fas fa-heart"></i> Weds</label>
+                        <input type="text" id="wedsText" placeholder="weds">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label><i class="fas fa-male"></i> Groom</label>
+                        <input type="text" id="groomName" placeholder="Enter groom's name">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label><i class="fas fa-info-circle"></i> Bride Details</label>
+                        <textarea id="brideDetails" placeholder="Enter bride's details"></textarea>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label><i class="fas fa-info-circle"></i> Groom Details</label>
+                        <textarea id="groomDetails" placeholder="Enter groom's details"></textarea>
+                    </div>-->
+                    <div class="section-header">
+                        <i class="fas fa-user-edit"></i>
+                        <h3>Edit Text</h3>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="dynamicTextarea">Edit Selected Text</label>
+                        <textarea id="dynamicTextarea" placeholder="Select a text box to edit"></textarea>
+                    </div>
+                </div>
+
+                <div id="styleBox">
+                    <div class="section-header">
+                        <i class="fas fa-paint-brush"></i>
+                        <h3>Style Options</h3>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label><i class="fas fa-font"></i> Font</label>
+                        <select id="font">
+                            <option value="'Dancing Script', cursive">Dancing Script</option>
+                            <option value="'Playfair Display', serif">Playfair Display</option>
+                            <option value="'Montserrat', sans-serif">Montserrat</option>
+                            <option value="'Great Vibes', cursive">Great Vibes</option>
+                            <option value="'Lora', serif">Lora</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label><i class="fas fa-palette"></i> Color</label>
+                        <input type="color" id="color" value="#4a4a4a">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label><i class="fas fa-text-height"></i> Size</label>
+                        <div class="size-control">
+                            <button class="size-btn" data-action="decrease"><i class="fas fa-minus"></i></button>
+                            <input type="number" id="size" min="12" max="72" value="24">
+                            <button class="size-btn" data-action="increase"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                    
+                    <button id="addTextBox"><i class="fas fa-plus"></i> Add Text Box</button>
+                </div>
+
+                <button class="more-options-btn">
+                    <i class="fas fa-sliders-h"></i>
+                    More editing options
+                </button>
+
+                <div class="zoom-control">
+                    <button class="zoom-out"><i class="fas fa-search-minus"></i></button>
+                    <input type="range" id="zoomRange" min="50" max="150" value="100">
+                    <button class="zoom-in"><i class="fas fa-search-plus"></i></button>
+                    <span class="zoom-value">100%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="editTitleModal" class="modal">
+        <div class="modal-content">
+            <h2>Edit Card Title</h2>
+            <input type="text" id="newTitleInput" placeholder="Enter new title">
+            <div class="modal-actions">
+                <button class="cancel-btn">Cancel</button>
+                <button class="save-btn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="moreOptionsModal" class="modal">
+        <div class="modal-content">
+            <h2>Additional Options</h2>
+            <div class="options-grid">
+                <button class="option-btn" id = "changeBackgroundBtn">
+                    <i class="fas fa-image"></i>
+                    Change Background
+                </button>
+                <button class="option-btn" id = "borderStyleBtn">
+                    <i class="fas fa-border-style"></i>
+                    Border Style
+                </button>
+                <button class="option-btn" id = "layersBtn">
+                    <i class="fas fa-layer-group"></i>
+                    Layers
+                </button>
+                <button class="option-btn" id = "effectsBtn">
+                    <i class="fas fa-magic"></i>
+                    Effects
+                </button>
+            </div>
+            <button class="close-modal">Close</button>
+        </div>
+    </div>
+
+    <div id="customizePagesModal" class="modal">
+        <div class="modal-content">
+            <h2>Customize Pages</h2>
+            <div class="pages-grid">
+                <div class="page-card">
+                    <img src="My Invitation.jpeg" alt="Front Page">
+                    <div class="page-card-actions">
+                        <button><i class="fas fa-edit"></i></button>
+                        <button><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+                <div class="add-page-card">
+                    <i class="fas fa-plus"></i>
+                    <span>Add New Page</span>
+                </div>
+            </div>
+            <button class="close-modal">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
